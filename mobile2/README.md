@@ -1,4 +1,5 @@
 # Mobile 2 — Design System Local
+```
 lib/
 ├── main/
 │   └── main.dart                 # ponto de entrada do app
