@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -35,34 +35,20 @@ void main() {
       MaterialApp(
         theme: AppTheme.light(),
         home: const AppScaffold(
-          title: 'Carteira',
+          title: 'FastMob',
           body: Text('corpo'),
           bottom: SizedBox(height: 40, child: Text('rodapé')),
         ),
       ),
     );
-    expect(find.text('Carteira'), findsOneWidget);
+    expect(find.text('FastMob'), findsOneWidget);
     expect(find.text('corpo'), findsOneWidget);
     expect(find.text('rodapé'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
   });
 
-  testWidgets('components build in dark theme too', (tester) async {
-    await tester.pumpWidget(
-      wrap(
-        dark: true,
-        const Column(
-          children: [
-            BalanceCard(balance: '1', income: '2', expense: '3'),
-            TransactionTile(
-              kind: TransactionKind.income,
-              title: 't',
-              amount: '1',
-            ),
-          ],
-        ),
-      ),
-    );
-    expect(find.byType(BalanceCard), findsOneWidget);
+  testWidgets('BottomPanel shows its child under the handle', (tester) async {
+    await tester.pumpWidget(wrap(const BottomPanel(child: Text('conteúdo'))));
+    expect(find.text('conteúdo'), findsOneWidget);
   });
 }

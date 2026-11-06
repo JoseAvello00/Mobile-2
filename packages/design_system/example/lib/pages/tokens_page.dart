@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -16,10 +16,13 @@ class TokensPage extends StatelessWidget {
       ('surface', scheme.surface),
       ('surfaceContainerHighest', scheme.surfaceContainerHighest),
       ('outline', scheme.outline),
-      ('income', semantic.income),
-      ('expense', semantic.expense),
-      ('transfer', semantic.transfer),
+      ('brandStart', semantic.brandStart),
+      ('brandEnd', semantic.brandEnd),
+      ('success', semantic.success),
+      ('info', semantic.info),
       ('warning', semantic.warning),
+      ('danger', semantic.danger),
+      ('star', semantic.star),
       ('muted', semantic.muted),
     ];
     final text = Theme.of(context).textTheme;
@@ -65,6 +68,19 @@ class TokensPage extends StatelessWidget {
                 ),
             ],
           ),
+          const Gap.md(),
+          Container(
+            height: 56,
+            decoration: BoxDecoration(
+              gradient: semantic.brandGradient,
+              borderRadius: AppRadius.lgAll,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'brandGradient',
+              style: text.labelLarge?.copyWith(color: Colors.white),
+            ),
+          ),
           const SectionHeader(title: 'Tipografia'),
           for (final (name, style) in styles)
             Padding(
@@ -102,6 +118,7 @@ class TokensPage extends StatelessWidget {
                 ('sm', AppRadius.smAll),
                 ('md', AppRadius.mdAll),
                 ('lg', AppRadius.lgAll),
+                ('xl', AppRadius.xlAll),
                 ('pill', AppRadius.pillAll),
               ]) ...[
                 Container(

@@ -19,7 +19,7 @@ abstract final class AppTheme {
       onPrimary: p.onPrimary,
       primaryContainer: p.primaryContainer,
       onPrimaryContainer: p.onPrimaryContainer,
-      secondary: p.transfer,
+      secondary: p.info,
       onSecondary: p.onPrimary,
       surface: p.surface,
       onSurface: p.onSurface,
@@ -44,6 +44,11 @@ abstract final class AppTheme {
       canvasColor: p.background,
       textTheme: textTheme,
       dividerColor: p.outline,
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: p.primary,
+        selectionHandleColor: p.primary,
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(color: p.primary),
       splashFactory: InkSparkle.splashFactory,
       extensions: [AppSemanticColors.fromPalette(p)],
       appBarTheme: AppBarTheme(
@@ -95,14 +100,17 @@ abstract final class AppTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
+          minimumSize: const Size.fromHeight(52),
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
-          textStyle: AppTypography.labelLarge,
+          textStyle: AppTypography.labelLarge.copyWith(
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
+          minimumSize: const Size.fromHeight(52),
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
           side: BorderSide(color: p.outline),
           foregroundColor: p.onSurface,
@@ -167,6 +175,28 @@ abstract final class AppTheme {
             fontSize: 12,
             color: p.onSurface,
           ),
+        ),
+      ),
+      // Without this, selected segments would use `secondary` (blue).
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? p.primaryContainer
+                : p.surface,
+          ),
+          foregroundColor: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? p.onPrimaryContainer
+                : p.onSurface,
+          ),
+          iconColor: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? p.primary
+                : p.onSurfaceMuted,
+          ),
+          side: WidgetStatePropertyAll(BorderSide(color: p.outline)),
+          textStyle: WidgetStatePropertyAll(AppTypography.labelLarge),
         ),
       ),
       dividerTheme: DividerThemeData(color: p.outline, space: 1, thickness: 1),

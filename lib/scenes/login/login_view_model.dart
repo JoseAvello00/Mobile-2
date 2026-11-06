@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'login_coordinator.dart';
 import 'login_result.dart';
@@ -12,7 +13,6 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel({required this._serverLogin, required this._coordinator});
 
   final ServerLogin _serverLogin;
-  // ignore: unused_field
   final LoginCoordinator _coordinator;
 
   String _email = '';
@@ -41,8 +41,8 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> submit() async {
-    if (_isLoading) return;
+  Future<bool> submit() async {
+    if (_isLoading) return false;
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -60,5 +60,10 @@ class LoginViewModel extends ChangeNotifier {
         _errorMessage = message;
     }
     notifyListeners();
+    return result is LoginSuccess;
+  }
+
+  void openHome(BuildContext context) {
+    _coordinator.showHome(context);
   }
 }

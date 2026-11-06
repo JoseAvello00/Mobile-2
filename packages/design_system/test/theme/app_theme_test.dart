@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -18,11 +18,32 @@ void main() {
       expect(theme.scaffoldBackgroundColor, AppColors.dark.background);
     });
 
+    test('the brand color is orange in both themes', () {
+      for (final palette in [AppColors.light, AppColors.dark]) {
+        final hue = HSLColor.fromColor(palette.primary).hue;
+        expect(hue, inInclusiveRange(15, 35));
+      }
+    });
+
     test('both themes register AppSemanticColors', () {
       for (final theme in [AppTheme.light(), AppTheme.dark()]) {
         final semantic = theme.extension<AppSemanticColors>();
         expect(semantic, isNotNull);
-        expect(semantic!.income, isNot(semantic.expense));
+        expect(semantic!.success, isNot(semantic.danger));
+      }
+    });
+
+    test('selected segments use the orange container, not blue', () {
+      for (final (theme, palette) in [
+        (AppTheme.light(), AppColors.light),
+        (AppTheme.dark(), AppColors.dark),
+      ]) {
+        final style = theme.segmentedButtonTheme.style!;
+        expect(
+          style.backgroundColor!.resolve({WidgetState.selected}),
+          palette.primaryContainer,
+        );
+        expect(style.backgroundColor!.resolve({}), palette.surface);
       }
     });
 
@@ -39,7 +60,11 @@ void main() {
           ),
         ),
       );
-      expect(colors.expense, AppColors.light.expense);
+      expect(colors.danger, AppColors.light.error);
+      expect(colors.brandGradient.colors, [
+        AppColors.light.brandStart,
+        AppColors.light.brandEnd,
+      ]);
     });
   });
 }

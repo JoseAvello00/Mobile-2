@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -16,10 +16,10 @@ class _StatesPageState extends State<StatesPage> {
   @override
   Widget build(BuildContext context) {
     final views = <Widget>[
-      const StateView.loading(message: 'Carregando lançamentos…'),
+      const StateView.loading(message: 'Procurando motoristas por perto…'),
       StateView.empty(
-        message: 'Nenhum lançamento neste mês',
-        actionLabel: 'Adicionar',
+        message: 'Você ainda não fez nenhuma corrida',
+        actionLabel: 'Pedir agora',
         onAction: () {},
       ),
       StateView.error(

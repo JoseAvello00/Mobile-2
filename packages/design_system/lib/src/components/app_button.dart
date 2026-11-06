@@ -51,10 +51,24 @@ class AppButton extends StatelessWidget {
 
   bool get _enabled => onPressed != null && !isLoading;
 
+  // While loading, the button keeps its colors (instead of turning grey) but
+  // swallows taps.
+  static void _ignoreTap() {}
+
   @override
   Widget build(BuildContext context) {
-    final child = _Content(label: label, icon: icon, isLoading: isLoading);
-    final callback = _enabled ? onPressed : null;
+    final scheme = Theme.of(context).colorScheme;
+    final child = _Content(
+      label: label,
+      icon: icon,
+      isLoading: isLoading,
+      spinnerColor: variant == AppButtonVariant.primary
+          ? scheme.onPrimary
+          : scheme.primary,
+    );
+    final VoidCallback? callback = _enabled
+        ? onPressed
+        : (isLoading ? _ignoreTap : null);
 
     final Widget button = switch (variant) {
       AppButtonVariant.primary => FilledButton(
@@ -84,18 +98,23 @@ class _Content extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.isLoading,
+    required this.spinnerColor,
   });
 
   final String label;
   final IconData? icon;
   final bool isLoading;
+  final Color spinnerColor;
 
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const SizedBox.square(
+      return SizedBox.square(
         dimension: 20,
-        child: CircularProgressIndicator.adaptive(strokeWidth: 2.2),
+        child: CircularProgressIndicator(
+          strokeWidth: 2.4,
+          color: spinnerColor,
+        ),
       );
     }
     if (icon == null) return Text(label);

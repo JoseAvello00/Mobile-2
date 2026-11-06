@@ -15,6 +15,7 @@ class AppScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.padded = true,
     this.showAppBar = true,
+    this.safeAreaTop = true,
   });
 
   final Widget body;
@@ -28,6 +29,10 @@ class AppScaffold extends StatelessWidget {
   final bool padded;
   final bool showAppBar;
 
+  /// Set to false when the body paints under the status bar itself, like the
+  /// brand hero of the login scene.
+  final bool safeAreaTop;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +44,7 @@ class AppScaffold extends StatelessWidget {
             )
           : null,
       body: SafeArea(
+        top: safeAreaTop,
         child: padded
             ? Padding(
                 padding: const EdgeInsets.symmetric(

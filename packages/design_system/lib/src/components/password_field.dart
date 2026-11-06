@@ -142,9 +142,9 @@ class _StrengthBar extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final (fill, color, label) = switch (strength) {
       PasswordStrength.empty => (0.0, scheme.outline, ''),
-      PasswordStrength.weak => (1 / 3, semantic.expense, 'Fraca'),
+      PasswordStrength.weak => (1 / 3, semantic.danger, 'Fraca'),
       PasswordStrength.fair => (2 / 3, semantic.warning, 'Razoável'),
-      PasswordStrength.strong => (1.0, semantic.income, 'Forte'),
+      PasswordStrength.strong => (1.0, semantic.success, 'Forte'),
     };
     return Semantics(
       label: label.isEmpty ? 'Força da senha' : 'Força da senha: $label',

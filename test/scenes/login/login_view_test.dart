@@ -1,10 +1,10 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
-import 'package:carteira_digital/scenes/login/login_coordinator.dart';
-import 'package:carteira_digital/scenes/login/login_factory.dart';
-import 'package:carteira_digital/scenes/login/login_result.dart';
-import 'package:carteira_digital/scenes/login/login_view.dart';
-import 'package:carteira_digital/scenes/login/login_view_model.dart';
-import 'package:carteira_digital/scenes/login/server_login.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
+import 'package:fastmob/scenes/login/login_coordinator.dart';
+import 'package:fastmob/scenes/login/login_factory.dart';
+import 'package:fastmob/scenes/login/login_result.dart';
+import 'package:fastmob/scenes/login/login_view.dart';
+import 'package:fastmob/scenes/login/login_view_model.dart';
+import 'package:fastmob/scenes/login/server_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -24,7 +24,10 @@ class _FakeServerLogin implements ServerLogin {
   }
 }
 
-class _FakeLoginCoordinator implements LoginCoordinator {}
+class _FakeLoginCoordinator implements LoginCoordinator {
+  @override
+  void showHome(BuildContext context) {}
+}
 
 Widget _app(Widget home) => MaterialApp(theme: AppTheme.light(), home: home);
 
@@ -47,6 +50,7 @@ void main() {
       _app(_view(_FakeServerLogin(const LoginFailure('x')))),
     );
 
+    expect(find.byType(FastMobLogo), findsOneWidget);
     expect(find.byType(AppTextField), findsNWidgets(2));
     expect(find.byType(PasswordField), findsOneWidget);
 

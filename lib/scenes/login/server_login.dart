@@ -19,7 +19,7 @@ abstract interface class ServerLogin {
 class DefaultServerLogin implements ServerLogin {
   const DefaultServerLogin({this.delay = const Duration(milliseconds: 600)});
 
-  static const email = 'ana@carteira.dev';
+  static const email = 'ana@fastmob.dev';
   static const password = '123456';
 
   final Duration delay;
@@ -41,7 +41,7 @@ class DefaultServerLogin implements ServerLogin {
   }
 }
 
-/// Real [ServerLogin], talking to the Carteira API (`POST /auth/login`).
+/// Real [ServerLogin], talking to the FastMob API (`POST /auth/login`).
 class ServerLoginReal implements ServerLogin {
   ServerLoginReal({
     String? baseUrl,

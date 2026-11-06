@@ -10,7 +10,7 @@ enum _StateKind { loading, empty, error }
 ///
 /// ```dart
 /// StateView.loading()
-/// StateView.empty(message: 'Nenhum lançamento neste mês')
+/// StateView.empty(message: 'Nenhuma corrida por aqui')
 /// StateView.error(message: 'Sem conexão', onRetry: vm.load.execute)
 /// ```
 class StateView extends StatelessWidget {
@@ -54,7 +54,7 @@ class StateView extends StatelessWidget {
         child: CircularProgressIndicator.adaptive(),
       ),
       _StateKind.empty => Icon(icon, size: 48, color: semantic.muted),
-      _StateKind.error => Icon(icon, size: 48, color: semantic.expense),
+      _StateKind.error => Icon(icon, size: 48, color: semantic.danger),
     };
 
     return Center(

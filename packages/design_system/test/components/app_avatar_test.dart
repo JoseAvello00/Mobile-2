@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

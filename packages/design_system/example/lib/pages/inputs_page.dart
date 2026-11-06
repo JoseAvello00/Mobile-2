@@ -1,4 +1,4 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -45,12 +45,6 @@ class InputsPage extends StatelessWidget {
               AppAvatar(name: 'Ana Ribeiro'),
               Gap.sm(),
               AppAvatar(name: 'Bruno Costa', size: 56),
-              Gap.sm(),
-              AppAvatar(
-                name: 'Ana Ribeiro',
-                size: 72,
-                imageUrl: 'https://i.pravatar.cc/150?img=47',
-              ),
             ],
           ),
           const Gap.xxl(),

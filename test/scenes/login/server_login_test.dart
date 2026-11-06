@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:carteira_digital/scenes/login/login_result.dart';
-import 'package:carteira_digital/scenes/login/server_login.dart';
+import 'package:fastmob/scenes/login/login_result.dart';
+import 'package:fastmob/scenes/login/server_login.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -12,7 +12,7 @@ void main() {
 
     test('accepts the test account', () async {
       final result = await server.fetchLogin(
-        email: 'ana@carteira.dev',
+        email: 'ana@fastmob.dev',
         password: '123456',
       );
       expect(result, isA<LoginSuccess>());
@@ -21,7 +21,7 @@ void main() {
 
     test('rejects a wrong password', () async {
       final result = await server.fetchLogin(
-        email: 'ana@carteira.dev',
+        email: 'ana@fastmob.dev',
         password: 'errada',
       );
       expect((result as LoginFailure).message, 'E-mail ou senha incorretos.');
@@ -51,14 +51,14 @@ void main() {
       });
 
       final result = await server.fetchLogin(
-        email: 'ana@carteira.dev',
+        email: 'ana@fastmob.dev',
         password: '123456',
       );
 
       expect(sent.method, 'POST');
       expect(sent.url.toString(), 'http://localhost:8080/auth/login');
       expect(jsonDecode(sent.body), {
-        'email': 'ana@carteira.dev',
+        'email': 'ana@fastmob.dev',
         'password': '123456',
       });
       expect((result as LoginSuccess).token, 'tok_1');

@@ -1,9 +1,10 @@
-import 'package:carteira_design_system/carteira_design_system.dart';
+import 'package:fastmob_design_system/fastmob_design_system.dart';
 import 'package:flutter/material.dart';
 
+import 'pages/brand_page.dart';
 import 'pages/buttons_page.dart';
 import 'pages/inputs_page.dart';
-import 'pages/lists_page.dart';
+import 'pages/mobility_page.dart';
 import 'pages/states_page.dart';
 import 'pages/tokens_page.dart';
 
@@ -21,7 +22,7 @@ class GalleryApp extends StatelessWidget {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeMode,
       builder: (context, mode, _) => MaterialApp(
-        title: 'Galeria',
+        title: 'FastMob · Galeria',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
@@ -37,16 +38,21 @@ class GalleryHome extends StatelessWidget {
 
   static final _pages = <({String title, IconData icon, Widget page})>[
     (title: 'Tokens', icon: Icons.palette_outlined, page: const TokensPage()),
+    (title: 'Marca', icon: Icons.bolt_rounded, page: const BrandPage()),
     (title: 'Botões', icon: Icons.smart_button, page: const ButtonsPage()),
     (title: 'Campos', icon: Icons.edit_outlined, page: const InputsPage()),
-    (title: 'Listas', icon: Icons.list_alt, page: const ListsPage()),
+    (
+      title: 'Corrida',
+      icon: Icons.directions_car_outlined,
+      page: const MobilityPage(),
+    ),
     (title: 'Estados', icon: Icons.hourglass_empty, page: const StatesPage()),
   ];
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Galeria',
+      title: 'Galeria FastMob',
       actions: const [ThemeModeButton()],
       padded: false,
       body: ListView.separated(
@@ -58,9 +64,9 @@ class GalleryHome extends StatelessWidget {
             leading: Icon(item.icon),
             title: Text(item.title),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () =>
-                Navigator.of(context)
-                    .push(MaterialPageRoute<void>(builder: (_) => item.page)),
+            onTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute<void>(builder: (_) => item.page)),
           );
         },
       ),
